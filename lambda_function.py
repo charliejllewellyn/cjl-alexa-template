@@ -67,6 +67,16 @@ def continue_dialog():
 ##############################
 
 
+def getSlot(event, slotName):
+    slots = event["request"]["intent"]["slots"][slotName]
+    return slots["value"]
+
+
+##############################
+# Custom Intents
+##############################
+
+
 def test(event, context):
     answer = "Whoop, it works!"
     return statement("test", answer)
@@ -78,7 +88,8 @@ def testSlot(event, context):
         return continue_dialog()
 
     elif dialog_state == "COMPLETED":
-        return statement("testSlot", "Cool, you're slot also works!")
+        slotValue = getSlot(event, 'name')
+        return statement("testSlot", "Cool, you're slot also works! You said " + slotValue)
 
     else:
         return statement("testSlot", "No dialog")
