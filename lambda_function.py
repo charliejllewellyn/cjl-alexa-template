@@ -3,7 +3,7 @@
 ##############################
 
 
-import requests
+import botocore.vendored.requests as requests
 
 
 ##############################
